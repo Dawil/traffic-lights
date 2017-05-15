@@ -27,3 +27,7 @@ The code is designed in a functional fashion to made testing easier. Except for 
 ### No Dependencies
 
 No non-standard libraries were used to make the project portable and limit install difficulties. They also weren't needed.
+
+### Not making the time intervals configurable
+
+It would have been trivial to add argparse support. However the code as is is very simple to read. Argparse support may have doubled the main function and not added real value.
