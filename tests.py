@@ -23,6 +23,10 @@ class TestCase(unittest.TestCase):
         assert main.switch(main.YELLOW) == main.RED
 
     def test_interval(self):
+        """
+        This test doesn't test the timer functionality for the sake of
+        brevity.
+        """
         events = [0, 0.4, 0.5, 0.9, 1]
         events.reverse()
         for i in islice(main.interval_iter(0.5, 0.1), 5):

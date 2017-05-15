@@ -5,6 +5,11 @@ YELLOW = 'YELLOW'
 GREEN = 'GREEN'
 
 def interval_iter(interval, warn_interval):
+    """
+    An iterator that accepts the main interval (e.g. 5 minutes) and
+    the amount before that interval to warn with yellow lights (e.g.
+    30 seconds).
+    """
     a_step = interval - warn_interval
     b_step = warn_interval
     count = 0
@@ -32,21 +37,21 @@ def switch(light):
         return GREEN
 
 if __name__ == '__main__':
-    ns = ('NS', RED)
-    ew = ('EW', GREEN)
+    # Initialize the state
+    ns = ['NS', RED]
+    ew = ['EW', GREEN]
 
-    intervals = interval_iter(5,1)
+    # Create the timer iterator
+    intervals = interval_iter(5,0.5)
     while True:
+        # Get the yellow event
         t = next(intervals)
-        print(t)
         ns[1] = warn_yellow(ns[1])
         ew[1] = warn_yellow(ew[1])
-        print(render(*ns))
-        print(render(*ew))
+        print(t, render(*ns), render(*ew))
 
+        # Get the switch event
         t = next(intervals)
-        print(t)
         ns[1] = switch(ns[1])
         ew[1] = switch(ew[1])
-        print(render(*ns))
-        print(render(*ew))
+        print(t, render(*ns), render(*ew))
