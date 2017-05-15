@@ -17,7 +17,7 @@ def interval_iter(interval, warn_interval):
         count += b_step
 
 def render(label, light):
-    print("{}: {}".format(label, light))
+    return "{}: {}".format(label, light)
 
 def warn_yellow(light):
     if light is GREEN:
@@ -32,20 +32,21 @@ def switch(light):
         return GREEN
 
 if __name__ == '__main__':
-    ns = RED
-    ew = GREEN
+    ns = ('NS', RED)
+    ew = ('EW', GREEN)
 
     intervals = interval_iter(5,1)
     while True:
         t = next(intervals)
         print(t)
-        ns = warn_yellow(ns)
-        ew = warn_yellow(ew)
-        render('(N,S)', ns)
-        render('(E,W)', ew)
+        ns[1] = warn_yellow(ns[1])
+        ew[1] = warn_yellow(ew[1])
+        print(render(*ns))
+        print(render(*ew))
+
         t = next(intervals)
         print(t)
-        ns = switch(ns)
-        ew = switch(ew)
-        render('(N,S)', ns)
-        render('(E,W)', ew)
+        ns[1] = switch(ns[1])
+        ew[1] = switch(ew[1])
+        print(render(*ns))
+        print(render(*ew))
